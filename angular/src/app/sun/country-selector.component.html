@@ -1,0 +1,14 @@
+<mat-form-field class="example-full-width">
+  <mat-label>Assignee</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="countryControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCountry">
+    @for (country of filteredOptions$ | async; track country) {
+    <mat-option [value]="country">{{ country.name }}</mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>
