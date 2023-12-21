@@ -1,35 +1,22 @@
-<form [formGroup]="sunForm">
-  <div class="form-row">
-    <app-datepicker
-      (selectedDateEvent)="selectDateChanged($event)"
-    ></app-datepicker>
-    <app-country-selector
-      (selectedCountryEvent)="selectCountryChanged($event)"
-    ></app-country-selector>
-  </div>
-  <div class="form-row">
-    <div>Selected date: {{ selectedDate }}</div>
-    <div>Selected country: {{ selectedCountry?.name }}</div>
-  </div>
-  <div class="form-row">
-    <button mat-raised-button (click)="showSunClicked()">
-      <mat-icon
-        aria-hidden="false"
-        aria-label="Sun icon"
-        fontIcon="wb_sunny"
-      ></mat-icon
-      >Show
-    </button>
-  </div>
+<div class="form-row">
+  <app-datepicker
+    (selectedDateEvent)="selectDateChanged($event)"
+  ></app-datepicker>
+  <app-country-selector
+    (selectedCountryEvent)="selectCountryChanged($event)"
+  ></app-country-selector>
+</div>
+<div class="form-row">
+  <button mat-raised-button (click)="showSunClicked()">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Sun icon"
+      fontIcon="wb_sunny"
+    ></mat-icon
+    >Show
+  </button>
+</div>
 
-  <div *ngIf="displayDetail"></div>
-
-  <!-- <mat-grid-list cols="2" gutterSize="10px" rowHeight="500px">
-    <mat-grid-tile>
-      <app-datepicker></app-datepicker>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-country-selector></app-country-selector>
-    </mat-grid-tile>
-  </mat-grid-list> -->
-</form>
+<div *ngIf="sun">
+  <app-sun-detail [sun]="sun"></app-sun-detail>
+</div>

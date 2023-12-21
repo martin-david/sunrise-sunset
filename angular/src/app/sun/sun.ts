@@ -1,7 +1,7 @@
 export default interface SunResponse {
   date: Date;
-  sunrise: string;
-  sunset: string;
+  sunrise: Date;
+  sunset: Date;
   timezone: string;
   utc_offset: number;
 }

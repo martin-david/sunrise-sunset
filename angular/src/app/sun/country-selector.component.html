@@ -9,7 +9,6 @@
   />
   <mat-autocomplete
     #auto="matAutocomplete"
-    requireSelection
     [displayWith]="displayCountry"
     (optionSelected)="countrySelected($event.option.value)"
   >
