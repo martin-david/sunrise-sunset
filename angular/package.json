@@ -32,6 +32,7 @@
     "@angular/compiler-cli": "^17.0.7",
     "@fortawesome/fontawesome-free": "^6.5.1",
     "@types/jasmine": "~5.1.4",
+    "angular-cli-ghpages": "^0.6.2",
     "jasmine-core": "~5.1.1",
     "karma": "~6.4.2",
     "karma-chrome-launcher": "~3.2.0",
