@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -24,6 +24,8 @@ import Country from './country';
   styleUrl: './country-selector.component.scss',
 })
 export class CountrySelectorComponent implements OnInit {
+  @Output() selectedCountryEvent = new EventEmitter<Country>();
+
   countryControl = new FormControl<string | Country>('');
   countries: Country[] = [];
   filteredOptions$: Observable<Country[]>;
@@ -33,21 +35,26 @@ export class CountrySelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.filteredOptions$ = this.countryControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => {
-        const name = typeof value === 'string' ? value : value?.name;
-        return name ? this.filter(name as string) : this.countries.slice();
-      })
-    );
-
-    this.countryService
-      .getCountries()
-      .subscribe((countries) => (this.countries = [...countries]));
+    this.countryService.getCountries().subscribe((countries) => {
+      const orderedCountries = [...countries];
+      orderedCountries.sort((a, b) => a.name.localeCompare(b.name));
+      this.countries = orderedCountries;
+      this.filteredOptions$ = this.countryControl.valueChanges.pipe(
+        startWith(''),
+        map((value) => {
+          const name = typeof value === 'string' ? value : value?.name;
+          return name ? this.filter(name as string) : this.countries.slice();
+        })
+      );
+    });
   }
 
   displayCountry(country: Country): string {
     return country && country.name ? country.name : '';
+  }
+
+  countrySelected(country: Country) {
+    this.selectedCountryEvent.emit(country);
   }
 
   private filter(name: string): Country[] {

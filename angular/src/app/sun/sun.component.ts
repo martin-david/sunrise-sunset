@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatepickerComponent } from './datepicker.component';
 import { CountrySelectorComponent } from './country-selector.component';
-import { CommonModule } from '@angular/common';
+import Country from './country';
+import { SunService } from './sun.service';
 
 @Component({
   standalone: true,
@@ -23,7 +26,31 @@ import { CommonModule } from '@angular/common';
   styleUrl: './sun.component.scss',
 })
 export class SunComponent {
-  displayDetail = true;
+  constructor(private snackBar: MatSnackBar, private sunService: SunService) {}
+
+  displayDetail = false;
+  selectedDate?: Date;
+  selectedCountry?: Country;
+
+  selectDateChanged(selectedDate: Date) {
+    this.selectedDate = selectedDate;
+  }
+
+  selectCountryChanged(selectedCountry: Country) {
+    this.selectedCountry = selectedCountry;
+  }
+
+  showSunClicked() {
+    if (!this.selectedDate) {
+      this.snackBar.open('Please select date from calendar.', undefined);
+    }
+
+    this.sunService.getSun(
+      this.selectedDate!,
+      this.selectedCountry!.latitude,
+      this.selectedCountry!.longitude
+    );
+  }
 
   sunForm = new FormGroup({
     datepicker: new FormControl(),
