@@ -36,9 +36,7 @@ export class CountrySelectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.countryService.getCountries().subscribe((countries) => {
-      const orderedCountries = [...countries];
-      orderedCountries.sort((a, b) => a.name.localeCompare(b.name));
-      this.countries = orderedCountries;
+      this.countries = [...countries];
       this.filteredOptions$ = this.countryControl.valueChanges.pipe(
         startWith(''),
         map((value) => {

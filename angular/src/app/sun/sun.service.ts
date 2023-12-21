@@ -38,7 +38,7 @@ export class SunService {
           utc_offset: rawResponse.results.utc_offset,
         } as SunResponse;
       }),
-      tap((sun) => this.logger.log('fetched sun')),
+      tap((sun) => this.logger.log(`fetched sun: ${sun}`)),
       catchError(this.handleError('getSun'))
     ) as Observable<SunResponse>;
   }
