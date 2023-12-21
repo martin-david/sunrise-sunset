@@ -1,0 +1,16 @@
+hr {
+  width: 80%;
+  margin: 29px 0 20px 0;
+}
+
+.row {
+  margin-top: 10px;
+  display: flex;
+  gap: 50px;
+  height: 50px;
+  justify-content: center; /* or use 'flex-start' to align them to the left */
+}
+
+.text {
+  margin-bottom: 10px;
+}

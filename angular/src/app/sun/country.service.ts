@@ -7,8 +7,8 @@ import LoggerService from '../logger.service';
 @Injectable({
   providedIn: 'root',
 })
-export class CountryService {
-  private readonly url = '../../assets/data.json';
+export default class CountryService {
+  private readonly url = '../../assets/countries.json';
 
   constructor(private logger: LoggerService, private httpClient: HttpClient) {}
 

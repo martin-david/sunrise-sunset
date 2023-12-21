@@ -1,0 +1,19 @@
+<mat-form-field>
+  <mat-label>Country</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="countryControl"
+    [matAutocomplete]="auto"
+    aria-label="Country selector"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="displayCountry"
+    (optionSelected)="countrySelected($event.option.value)"
+  >
+    @for (country of filteredOptions$ | async; track country) {
+    <mat-option [value]="country">{{ country.name }}</mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

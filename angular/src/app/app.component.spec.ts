@@ -14,16 +14,18 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'sunrise-sunset' title`, () => {
+  it(`should have the 'Sunrise & Sunset App' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('sunrise-sunset');
+    expect(app.title).toEqual('Sunrise & Sunset App');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, sunrise-sunset');
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Hello, Sunrise & Sunset App'
+    );
   });
 });

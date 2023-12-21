@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, tap, catchError, map } from 'rxjs';
+import dayjs from 'dayjs';
+import dayjsPluginUTC from 'dayjs/plugin/utc';
+import dayjsPluginCustomParseFormat from 'dayjs/plugin/customParseFormat';
 import LoggerService from '../logger.service';
 import SunResponse from './sun';
 
@@ -8,7 +11,10 @@ import SunResponse from './sun';
   providedIn: 'root',
 })
 export class SunService {
-  constructor(private logger: LoggerService, private httpClient: HttpClient) {}
+  constructor(private logger: LoggerService, private httpClient: HttpClient) {
+    dayjs.extend(dayjsPluginUTC);
+    dayjs.extend(dayjsPluginCustomParseFormat);
+  }
 
   getSun(
     date: Date,
@@ -24,13 +30,10 @@ export class SunService {
           throw new Error(`API call failed with response: ${rawResponse}`);
         }
 
-        // const dateParts = rawResponse.results.date.split('-');
-
         return {
-          //   date: new Date(dateParts[0], dateParts[1] - 1, dateParts[2]), // month is 0-based, that's why we need dataParts[1] - 1
           date: new Date(`${rawResponse.results.date}T00:00:00`),
-          sunrise: rawResponse.results.sunrise,
-          sunset: rawResponse.results.sunset,
+          sunrise: this.getDateFromTimeString(rawResponse.results.sunrise),
+          sunset: this.getDateFromTimeString(rawResponse.results.sunset),
           timezone: rawResponse.results.timezone,
           utc_offset: rawResponse.results.utc_offset,
         } as SunResponse;
@@ -38,6 +41,10 @@ export class SunService {
       tap((sun) => this.logger.log('fetched sun')),
       catchError(this.handleError('getSun'))
     ) as Observable<SunResponse>;
+  }
+
+  private getDateFromTimeString(input: string): Date {
+    return dayjs.utc(input, 'h:mm:ss A').toDate();
   }
 
   private handleError<T>(operation = 'operation') {
