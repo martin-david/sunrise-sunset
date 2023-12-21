@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { CountryService } from './country.service';
+import CountryService from './country.service';
 import Country from './country';
 
 @Component({
@@ -41,7 +41,9 @@ export class CountrySelectorComponent implements OnInit {
       })
     );
 
-    this.countries = this.countryService.getCountries();
+    this.countryService
+      .getCountries()
+      .subscribe((countries) => (this.countries = [...countries]));
   }
 
   displayCountry(country: Country): string {
