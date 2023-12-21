@@ -1,10 +1,13 @@
-<hr />
-<div class="form-row">
-  <mat-icon
-    aria-hidden="false"
-    aria-label="Sun icon"
-    fontIcon="wb_sunny"
-  ></mat-icon
-  >Show
+<div class="row"><hr /></div>
+<div class="row">
+  <i class="fa fa-sun fa-2xl"></i>
+  <span class="text"
+    >Sunrise is at: {{ sun?.sunrise?.toLocaleTimeString() }}</span
+  >
 </div>
-<div class="form-row"></div>
+<div class="row">
+  <i class="fa fa-moon fa-2xl"></i>
+  <span class="text"
+    >Sunset is at: {{ sun?.sunset?.toLocaleTimeString() }}</span
+  >
+</div>

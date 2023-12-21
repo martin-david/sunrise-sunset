@@ -1,12 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { DatepickerComponent } from './datepicker.component';
-import { CountrySelectorComponent } from './country-selector.component';
-import Country from './country';
 import SunResponse from './sun';
 
 @Component({
@@ -16,6 +10,6 @@ import SunResponse from './sun';
   templateUrl: './sun-detail.component.html',
   styleUrl: './sun-detail.component.scss',
 })
-export class SunComponent {
-  @Input sun?: SunResponse;
+export class SunDetailComponent {
+  @Input() sun?: SunResponse;
 }
