@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "build:production"
+              "buildTarget": "sunrise-sunset:build:production"
             },
             "development": {
-              "buildTarget": "build:development"
+              "buildTarget": "sunrise-sunset:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "build"
+            "buildTarget": "sunrise-sunset:build"
           }
         },
         "test": {
