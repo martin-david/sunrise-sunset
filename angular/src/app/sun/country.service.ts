@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, tap, catchError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Observable, tap, catchError, of } from 'rxjs';
 import Country from './country';
 import LoggerService from '../logger.service';
+import countriesData from '../../assets/countries.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export default class CountryService {
-  private readonly url = '../../assets/countries.json';
-
-  constructor(private logger: LoggerService, private httpClient: HttpClient) {}
+  constructor(private logger: LoggerService) {}
 
   getCountries(): Observable<Country[]> {
-    return this.httpClient.get<Country[]>(this.url).pipe(
-      tap((countries) => this.logger.log('fetched countries')),
+    const countries = countriesData as Country[];
+    return of(countries).pipe(
+      tap(() => this.logger.log('fetched countries')),
       catchError(this.handleError('getCountries'))
     ) as Observable<Country[]>;
   }

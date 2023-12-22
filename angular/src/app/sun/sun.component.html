@@ -1,19 +1,10 @@
-<div class="form-row">
-  <app-datepicker
-    (selectedDateEvent)="selectDateChanged($event)"
-  ></app-datepicker>
-  <app-country-selector
-    (selectedCountryEvent)="selectCountryChanged($event)"
-  ></app-country-selector>
+<div class="form-row center">
+  <app-datepicker (selectedDateEvent)="selectDateChanged($event)" class="datepicker"></app-datepicker>&nbsp;
+  <app-country-selector (selectedCountryEvent)="selectCountryChanged($event)" class="country-selector"></app-country-selector>
 </div>
-<div class="form-row">
+<div class="form-row center">
   <button mat-raised-button (click)="showSunClicked()">
-    <mat-icon
-      aria-hidden="false"
-      aria-label="Sun icon"
-      fontIcon="wb_sunny"
-    ></mat-icon
-    >Show
+    <mat-icon aria-hidden="false" aria-label="Sun icon" fontIcon="wb_sunny"></mat-icon>Show
   </button>
 </div>
 
