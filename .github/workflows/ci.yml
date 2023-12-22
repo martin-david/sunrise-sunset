@@ -1,4 +1,4 @@
-name: Run 
+name: Run integration tests
 
 #on: [push]
 on: [workflow_dispatch]
