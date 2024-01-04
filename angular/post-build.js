@@ -1,2 +1,9 @@
 const fs = require('fs-extra');
-fs.move('docs/browser', 'docs', (err) => { if (err) { return console.error(err); } });
+(async () => {
+    try {
+        await fs.move('docs/browser', '../docs', { overwrite: true });
+        await fs.remove('docs');
+    } catch (err) {
+        console.error(err);
+    }
+})()
