@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  web:
+    image: sunrise-sunset
+    build:
+      context: angular
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - "8081:80"    # Map HTTP port
+      - "8443:443"   # Map HTTPS port
+    volumes:
+      - ./angular:/sunrise-sunset
+      - /sunrise-sunset/node_modules
+      - ./angular/ssl:/etc/nginx/ssl  # Mount the SSL certificates
