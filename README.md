@@ -6,10 +6,10 @@ https://martin-david.github.io/sunrise-sunset/
 
 ## Docker
 
-Install certificate from /angular/ssl/localhost.crt to Trusted Root Certificates
-docker compose up
-https://localhost:8443/
-Hosted on Nginx for details check Dockerfile
+Install certificate from /angular/ssl/localhost.crt to Trusted Root Certificates<br/>
+docker compose up<br/>
+https://localhost:8443/<br/>
+Hosted on Nginx for details check [Dockerfile](angular/Dockerfile)
 
 ## Building project for GitHub Pages
 
